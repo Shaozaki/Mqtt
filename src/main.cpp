@@ -5,20 +5,19 @@
 #include <Wire.h>
 #include <Adafruit_BMP085.h>
 
-// -- configurasi --
+// konfigurasi 
 const char *SSID = "Nama Wifi";
 const char *PASS = "Password wifi";
 const char *MQTT_BROKER = "broker.hivemq.com";
 const char *MQTT_ID = "ESP8266_Minimalist_001";
 const int MQTT_PORT = 1883;
 
-// -- Hardware --
+// atur pin dan hardware
 #define PIN_DHT 14
 #define PIN_RAIN A0
 #define RAIN_DRY 750 
 #define RAIN_WET 200 
-
-// -- Objects --
+ 
 DHT dht(PIN_DHT, DHT22);
 Adafruit_BMP085 bmp;
 WiFiClient espClient;
@@ -26,7 +25,7 @@ PubSubClient client(espClient);
 
 unsigned long lastMsg = 0;
 
-// -- Sensor Helpers --
+// konfigurasi sensor
 
 float getTemp() { return dht.readTemperature(); }
 float getHumid() { return dht.readHumidity(); }
@@ -60,7 +59,7 @@ String getPressStatus(float p)
                                              : "Rendah";
 }
 
-// -- Connection Helpers --
+// wifi setup
 
 void setupWiFi()
 {
@@ -85,7 +84,7 @@ void reconnect()
   }
 }
 
-// 
+// led builtin indikator koenksi mqtt dan wifi
 
 void setup()
 {
